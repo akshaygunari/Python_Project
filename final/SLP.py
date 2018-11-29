@@ -31,38 +31,38 @@ def vp_start_gui():
     SLP_support.init(root, top)
     root.mainloop()
 
-END = None
+w = None
 def create_Toplevel1(root, *args, **kwargs):
     '''Starting point when module is imported by another program.'''
-    global END, w_win, rt
+    global w, w_win, rt
     rt = root
-    END = tk.Toplevel (root)
-    top = Toplevel1 (END)
-    SLP_support.init(END, top, *args, **kwargs)
-    return (END, top)
+    w = tk.Toplevel (root)
+    top = Toplevel1 (w)
+    SLP_support.init(w, top, *args, **kwargs)
+    return (w, top)
 
 def destroy_Toplevel1():
-    global END
-    END.destroy()
-    END = None
+    global w
+    w.destroys()
+    w = None
 
 class Toplevel1:
     def doRefresh(self):
-        self.Entry1.delete(0,END)
-        self.Entry2.delete(0,END)
-        self.Entry3.delete(0,END)
-        self.Entry4.delete(0,END)
-        self.Entry5.delete(0,END)
-        self.Entry6.delete(0,END)
-        self.Entry7.delete(0,END)
-        self.Entry8.delete(0,END)
-        self.Entry9.delete(0,END)
-        self.Entry10.delete(0,END)
-        self.Entry11.delete(0,END)
-        self.Entry12.delete(0,END)
-        self.Entry13.delete(0,END)
-        self.Entry14.delete(0,END)
-        self.Entry15.delete(0,END)
+        self.Entry1.delete(0,'end')
+        self.Entry2.delete(0,'end')
+        self.Entry3.delete(0,'end')
+        self.Entry4.delete(0,'end')
+        self.Entry5.delete(0,'end')
+        self.Entry6.delete(0,'end')
+        self.Entry7.delete(0,'end')
+        self.Entry8.delete(0,'end')
+        self.Entry9.delete(0,'end')
+        self.Entry10.delete(0,'end')
+        self.Entry11.delete(0,'end')
+        self.Entry12.delete(0,'end')
+        self.Entry13.delete(0,'end')
+        self.Entry14.delete(0,'end')
+        self.Entry15.delete(0,'end')
         return
     def solveMatrix(self):
         condition1 = ((self.Entry1.get() is "") or (self.Entry2.get() is "") or (self.Entry3.get() is "") or (self.Entry4.get() is "") or (self.Entry5.get() is "") or (self.Entry6.get() is "") or (self.Entry7.get() is "") or (self.Entry8.get() is "") or (self.Entry9.get() is "") or (self.Entry10.get() is "") or (self.Entry11.get() is "") or (self.Entry12.get() is ""))
@@ -79,7 +79,7 @@ class Toplevel1:
             matrix2 = np.linalg.inv(matrix1)
         except np.linalg.LinAlgError as err:
             if 'Singular matrix' in str(err):
-                fmsgbox.showinfo("Invalid Input!","No 2 Equations can be same.")
+                fmsgbox.showinfo("Invalid Input!","No two Equations can be same.")
             else:
                 raise
         matrix3 = np.array([float(self.Entry4.get()),float(self.Entry8.get()),float(self.Entry12.get())])
@@ -88,7 +88,6 @@ class Toplevel1:
         self.Entry14.insert(0,results[1])
         self.Entry15.insert(0,results[2])
         return
-        
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
            top is the toplevel containing window.'''
@@ -97,18 +96,20 @@ class Toplevel1:
         _compcolor = '#d9d9d9' # X11 color: 'gray85'
         _ana1color = '#d9d9d9' # X11 color: 'gray85' 
         _ana2color = '#d9d9d9' # X11 color: 'gray85' 
-        font10 = "-family {Footlight MT Light} -size 20 -weight bold "  \
-            "-slant roman -underline 0 -overstrike 0"
-        font11 = "-family Calibri -size 14 -weight bold -slant italic "  \
-            "-underline 0 -overstrike 0"
+        font10 = "-family {Franklin Gothic Medium Cond} -size 20 "  \
+            "-weight bold -slant italic -underline 1 -overstrike 0"
+        font11 = "-family {Segoe UI} -size 11 -weight bold -slant "  \
+            "roman -underline 0 -overstrike 0"
         font12 = "-family Calibri -size 14 -weight bold -slant italic "  \
+            "-underline 0 -overstrike 0"
+        font13 = "-family Calibri -size 14 -weight bold -slant italic "  \
             "-underline 1 -overstrike 0"
-        font9 = "-family {Franklin Gothic Medium Cond} -size 20 "  \
-            "-weight bold -slant italic -underline 1 -overstrike 1"
+        font9 = "-family {Footlight MT Light} -size 20 -weight bold "  \
+            "-slant roman -underline 0 -overstrike 0"
 
         top.geometry("600x450+557+153")
-        top.title("EQUATION SOLVER")
-        top.configure(background="#d9d9d9")
+        top.title("Matrix Mania")
+        top.configure(background="#565656")
         top.configure(highlightbackground="#d9d9d9")
         top.configure(highlightcolor="black")
 
@@ -116,10 +117,10 @@ class Toplevel1:
         self.Label1.place(relx=0.033, rely=0.133, height=29, width=100)
         self.Label1.configure(activebackground="#f9f9f9")
         self.Label1.configure(activeforeground="black")
-        self.Label1.configure(background="#d9d9d9")
+        self.Label1.configure(background="#565656")
         self.Label1.configure(disabledforeground="#a3a3a3")
-        self.Label1.configure(font=font12)
-        self.Label1.configure(foreground="#000000")
+        self.Label1.configure(font=font13)
+        self.Label1.configure(foreground="#fefff7")
         self.Label1.configure(highlightbackground="#d9d9d9")
         self.Label1.configure(highlightcolor="#000000")
         self.Label1.configure(text='''Equation 1 :''')
@@ -163,8 +164,9 @@ class Toplevel1:
         self.Message1_6 = tk.Message(top)
         self.Message1_6.place(relx=0.217, rely=0.2, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_6.configure(background="#d9d9d9")
-        self.Message1_6.configure(foreground="#000000")
+        self.Message1_6.configure(background="#565656")
+        self.Message1_6.configure(font=font11)
+        self.Message1_6.configure(foreground="#ffffff")
         self.Message1_6.configure(highlightbackground="#d9d9d9")
         self.Message1_6.configure(highlightcolor="black")
         self.Message1_6.configure(text='''+''')
@@ -173,8 +175,9 @@ class Toplevel1:
         self.Message1_7 = tk.Message(top)
         self.Message1_7.place(relx=0.367, rely=0.2, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_7.configure(background="#d9d9d9")
-        self.Message1_7.configure(foreground="#000000")
+        self.Message1_7.configure(background="#565656")
+        self.Message1_7.configure(font=font11)
+        self.Message1_7.configure(foreground="#ffffff")
         self.Message1_7.configure(highlightbackground="#d9d9d9")
         self.Message1_7.configure(highlightcolor="black")
         self.Message1_7.configure(text='''Y''')
@@ -183,8 +186,9 @@ class Toplevel1:
         self.Message1_8 = tk.Message(top)
         self.Message1_8.place(relx=0.417, rely=0.2, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_8.configure(background="#d9d9d9")
-        self.Message1_8.configure(foreground="#000000")
+        self.Message1_8.configure(background="#565656")
+        self.Message1_8.configure(font=font11)
+        self.Message1_8.configure(foreground="#ffffff")
         self.Message1_8.configure(highlightbackground="#d9d9d9")
         self.Message1_8.configure(highlightcolor="black")
         self.Message1_8.configure(text='''+''')
@@ -193,8 +197,9 @@ class Toplevel1:
         self.Message1_9 = tk.Message(top)
         self.Message1_9.place(relx=0.567, rely=0.2, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_9.configure(background="#d9d9d9")
-        self.Message1_9.configure(foreground="#000000")
+        self.Message1_9.configure(background="#565656")
+        self.Message1_9.configure(font=font11)
+        self.Message1_9.configure(foreground="#ffffff")
         self.Message1_9.configure(highlightbackground="#d9d9d9")
         self.Message1_9.configure(highlightcolor="black")
         self.Message1_9.configure(text='''Z''')
@@ -203,8 +208,9 @@ class Toplevel1:
         self.Message1_10 = tk.Message(top)
         self.Message1_10.place(relx=0.617, rely=0.2, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_10.configure(background="#d9d9d9")
-        self.Message1_10.configure(foreground="#000000")
+        self.Message1_10.configure(background="#565656")
+        self.Message1_10.configure(font=font11)
+        self.Message1_10.configure(foreground="#ffffff")
         self.Message1_10.configure(highlightbackground="#d9d9d9")
         self.Message1_10.configure(highlightcolor="black")
         self.Message1_10.configure(text='''=''')
@@ -214,10 +220,10 @@ class Toplevel1:
         self.Label1_1.place(relx=0.033, rely=0.267, height=29, width=100)
         self.Label1_1.configure(activebackground="#f9f9f9")
         self.Label1_1.configure(activeforeground="black")
-        self.Label1_1.configure(background="#d9d9d9")
+        self.Label1_1.configure(background="#565656")
         self.Label1_1.configure(disabledforeground="#a3a3a3")
-        self.Label1_1.configure(font=font12)
-        self.Label1_1.configure(foreground="#000000")
+        self.Label1_1.configure(font=font13)
+        self.Label1_1.configure(foreground="#ffffff")
         self.Label1_1.configure(highlightbackground="#d9d9d9")
         self.Label1_1.configure(highlightcolor="#000000")
         self.Label1_1.configure(text='''Equation 2:''')
@@ -249,8 +255,9 @@ class Toplevel1:
         self.Message1_3 = tk.Message(top)
         self.Message1_3.place(relx=0.217, rely=0.333, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_3.configure(background="#d9d9d9")
-        self.Message1_3.configure(foreground="#000000")
+        self.Message1_3.configure(background="#565656")
+        self.Message1_3.configure(font=font11)
+        self.Message1_3.configure(foreground="#ffffff")
         self.Message1_3.configure(highlightbackground="#d9d9d9")
         self.Message1_3.configure(highlightcolor="black")
         self.Message1_3.configure(text='''+''')
@@ -259,8 +266,9 @@ class Toplevel1:
         self.Message1_4 = tk.Message(top)
         self.Message1_4.place(relx=0.167, rely=0.2, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_4.configure(background="#d9d9d9")
-        self.Message1_4.configure(foreground="#000000")
+        self.Message1_4.configure(background="#565656")
+        self.Message1_4.configure(font=font11)
+        self.Message1_4.configure(foreground="#ffffff")
         self.Message1_4.configure(highlightbackground="#d9d9d9")
         self.Message1_4.configure(highlightcolor="black")
         self.Message1_4.configure(text='''X''')
@@ -269,8 +277,9 @@ class Toplevel1:
         self.Message1_5 = tk.Message(top)
         self.Message1_5.place(relx=0.167, rely=0.333, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_5.configure(background="#d9d9d9")
-        self.Message1_5.configure(foreground="#000000")
+        self.Message1_5.configure(background="#565656")
+        self.Message1_5.configure(font=font11)
+        self.Message1_5.configure(foreground="#ffffff")
         self.Message1_5.configure(highlightbackground="#d9d9d9")
         self.Message1_5.configure(highlightcolor="black")
         self.Message1_5.configure(text='''X''')
@@ -291,8 +300,9 @@ class Toplevel1:
         self.Message1_2 = tk.Message(top)
         self.Message1_2.place(relx=0.367, rely=0.333, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_2.configure(background="#d9d9d9")
-        self.Message1_2.configure(foreground="#000000")
+        self.Message1_2.configure(background="#565656")
+        self.Message1_2.configure(font=font11)
+        self.Message1_2.configure(foreground="#ffffff")
         self.Message1_2.configure(highlightbackground="#d9d9d9")
         self.Message1_2.configure(highlightcolor="black")
         self.Message1_2.configure(text='''Y''')
@@ -301,8 +311,9 @@ class Toplevel1:
         self.Message1_1 = tk.Message(top)
         self.Message1_1.place(relx=0.417, rely=0.333, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_1.configure(background="#d9d9d9")
-        self.Message1_1.configure(foreground="#000000")
+        self.Message1_1.configure(background="#565656")
+        self.Message1_1.configure(font=font11)
+        self.Message1_1.configure(foreground="#ffffff")
         self.Message1_1.configure(highlightbackground="#d9d9d9")
         self.Message1_1.configure(highlightcolor="black")
         self.Message1_1.configure(text='''+''')
@@ -323,8 +334,9 @@ class Toplevel1:
         self.Message1_2 = tk.Message(top)
         self.Message1_2.place(relx=0.567, rely=0.333, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_2.configure(background="#d9d9d9")
-        self.Message1_2.configure(foreground="#000000")
+        self.Message1_2.configure(background="#565656")
+        self.Message1_2.configure(font=font11)
+        self.Message1_2.configure(foreground="#ffffff")
         self.Message1_2.configure(highlightbackground="#d9d9d9")
         self.Message1_2.configure(highlightcolor="black")
         self.Message1_2.configure(text='''Z''')
@@ -333,8 +345,9 @@ class Toplevel1:
         self.Message1_3 = tk.Message(top)
         self.Message1_3.place(relx=0.617, rely=0.333, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_3.configure(background="#d9d9d9")
-        self.Message1_3.configure(foreground="#000000")
+        self.Message1_3.configure(background="#565656")
+        self.Message1_3.configure(font=font11)
+        self.Message1_3.configure(foreground="#ffffff")
         self.Message1_3.configure(highlightbackground="#d9d9d9")
         self.Message1_3.configure(highlightcolor="black")
         self.Message1_3.configure(text='''=''')
@@ -356,10 +369,10 @@ class Toplevel1:
         self.Label1_2.place(relx=0.033, rely=0.4, height=29, width=100)
         self.Label1_2.configure(activebackground="#f9f9f9")
         self.Label1_2.configure(activeforeground="black")
-        self.Label1_2.configure(background="#d9d9d9")
+        self.Label1_2.configure(background="#565656")
         self.Label1_2.configure(disabledforeground="#a3a3a3")
-        self.Label1_2.configure(font=font12)
-        self.Label1_2.configure(foreground="#000000")
+        self.Label1_2.configure(font=font13)
+        self.Label1_2.configure(foreground="#ffffff")
         self.Label1_2.configure(highlightbackground="#d9d9d9")
         self.Label1_2.configure(highlightcolor="#000000")
         self.Label1_2.configure(text='''Equation 3:''')
@@ -379,8 +392,9 @@ class Toplevel1:
         self.Message1_4 = tk.Message(top)
         self.Message1_4.place(relx=0.167, rely=0.467, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_4.configure(background="#d9d9d9")
-        self.Message1_4.configure(foreground="#000000")
+        self.Message1_4.configure(background="#565656")
+        self.Message1_4.configure(font=font11)
+        self.Message1_4.configure(foreground="#ffffff")
         self.Message1_4.configure(highlightbackground="#d9d9d9")
         self.Message1_4.configure(highlightcolor="black")
         self.Message1_4.configure(text='''X''')
@@ -389,8 +403,9 @@ class Toplevel1:
         self.Message1_5 = tk.Message(top)
         self.Message1_5.place(relx=0.217, rely=0.467, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_5.configure(background="#d9d9d9")
-        self.Message1_5.configure(foreground="#000000")
+        self.Message1_5.configure(background="#565656")
+        self.Message1_5.configure(font=font11)
+        self.Message1_5.configure(foreground="#ffffff")
         self.Message1_5.configure(highlightbackground="#d9d9d9")
         self.Message1_5.configure(highlightcolor="black")
         self.Message1_5.configure(text='''+''')
@@ -411,8 +426,9 @@ class Toplevel1:
         self.Message1_6 = tk.Message(top)
         self.Message1_6.place(relx=0.367, rely=0.467, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_6.configure(background="#d9d9d9")
-        self.Message1_6.configure(foreground="#000000")
+        self.Message1_6.configure(background="#565656")
+        self.Message1_6.configure(font=font11)
+        self.Message1_6.configure(foreground="#ffffff")
         self.Message1_6.configure(highlightbackground="#d9d9d9")
         self.Message1_6.configure(highlightcolor="black")
         self.Message1_6.configure(text='''Y''')
@@ -421,8 +437,9 @@ class Toplevel1:
         self.Message1_7 = tk.Message(top)
         self.Message1_7.place(relx=0.417, rely=0.467, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_7.configure(background="#d9d9d9")
-        self.Message1_7.configure(foreground="#000000")
+        self.Message1_7.configure(background="#565656")
+        self.Message1_7.configure(font=font11)
+        self.Message1_7.configure(foreground="#ffffff")
         self.Message1_7.configure(highlightbackground="#d9d9d9")
         self.Message1_7.configure(highlightcolor="black")
         self.Message1_7.configure(text='''+''')
@@ -440,25 +457,27 @@ class Toplevel1:
         self.Entry11.configure(selectbackground="#c4c4c4")
         self.Entry11.configure(selectforeground="black")
 
-        self.Message1_9 = tk.Message(top)
-        self.Message1_9.place(relx=0.567, rely=0.467, relheight=0.051
+        self.Message1_8 = tk.Message(top)
+        self.Message1_8.place(relx=0.567, rely=0.467, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_9.configure(background="#d9d9d9")
-        self.Message1_9.configure(foreground="#000000")
+        self.Message1_8.configure(background="#565656")
+        self.Message1_8.configure(font=font11)
+        self.Message1_8.configure(foreground="#ffffff")
+        self.Message1_8.configure(highlightbackground="#d9d9d9")
+        self.Message1_8.configure(highlightcolor="black")
+        self.Message1_8.configure(text='''Z''')
+        self.Message1_8.configure(width=60)
+
+        self.Message1_9 = tk.Message(top)
+        self.Message1_9.place(relx=0.617, rely=0.467, relheight=0.051
+                , relwidth=0.037)
+        self.Message1_9.configure(background="#565656")
+        self.Message1_9.configure(font=font11)
+        self.Message1_9.configure(foreground="#ffffff")
         self.Message1_9.configure(highlightbackground="#d9d9d9")
         self.Message1_9.configure(highlightcolor="black")
-        self.Message1_9.configure(text='''Z''')
+        self.Message1_9.configure(text='''=''')
         self.Message1_9.configure(width=60)
-
-        self.Message1_10 = tk.Message(top)
-        self.Message1_10.place(relx=0.617, rely=0.467, relheight=0.051
-                , relwidth=0.037)
-        self.Message1_10.configure(background="#d9d9d9")
-        self.Message1_10.configure(foreground="#000000")
-        self.Message1_10.configure(highlightbackground="#d9d9d9")
-        self.Message1_10.configure(highlightcolor="black")
-        self.Message1_10.configure(text='''=''')
-        self.Message1_10.configure(width=60)
 
         self.Entry12 = tk.Entry(top)
         self.Entry12.place(relx=0.667, rely=0.467,height=20, relwidth=0.09)
@@ -474,11 +493,11 @@ class Toplevel1:
 
         self.Button1 = tk.Button(top)
         self.Button1.place(relx=0.167, rely=0.644, height=49, width=85)
-        self.Button1.configure(activebackground="#d9d9d9")
+        self.Button1.configure(activebackground="#98DC9A")
         self.Button1.configure(activeforeground="#000000")
         self.Button1.configure(background="#d9d9d9")
         self.Button1.configure(disabledforeground="#a3a3a3")
-        self.Button1.configure(font=font10)
+        self.Button1.configure(font=font9)
         self.Button1.configure(foreground="#000000")
         self.Button1.configure(highlightbackground="#d9d9d9")
         self.Button1.configure(highlightcolor="#000000")
@@ -487,11 +506,12 @@ class Toplevel1:
 
         self.Button2 = tk.Button(top)
         self.Button2.place(relx=0.533, rely=0.644, height=49, width=103)
-        self.Button2.configure(activebackground="#d9d9d9")
-        self.Button2.configure(activeforeground="#000000")
+        self.Button2.configure(activebackground="#4F49A4")
+        self.Button2.configure(activeforeground="white")
+        self.Button2.configure(activeforeground="#ffffff")
         self.Button2.configure(background="#d9d9d9")
         self.Button2.configure(disabledforeground="#a3a3a3")
-        self.Button2.configure(font=font10)
+        self.Button2.configure(font=font9)
         self.Button2.configure(foreground="#000000")
         self.Button2.configure(highlightbackground="#d9d9d9")
         self.Button2.configure(highlightcolor="#000000")
@@ -502,23 +522,24 @@ class Toplevel1:
         self.Label2.place(relx=0.05, rely=0.778, height=29, width=64)
         self.Label2.configure(activebackground="#f9f9f9")
         self.Label2.configure(activeforeground="black")
-        self.Label2.configure(background="#d9d9d9")
+        self.Label2.configure(background="#565656")
         self.Label2.configure(disabledforeground="#a3a3a3")
-        self.Label2.configure(font=font11)
-        self.Label2.configure(foreground="#000000")
+        self.Label2.configure(font=font12)
+        self.Label2.configure(foreground="#ffffff")
         self.Label2.configure(highlightbackground="#d9d9d9")
         self.Label2.configure(highlightcolor="black")
         self.Label2.configure(text='''Result:''')
 
-        self.Message1_9 = tk.Message(top)
-        self.Message1_9.place(relx=0.05, rely=0.889, relheight=0.051
+        self.Message1_11 = tk.Message(top)
+        self.Message1_11.place(relx=0.05, rely=0.889, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_9.configure(background="#d9d9d9")
-        self.Message1_9.configure(foreground="#000000")
-        self.Message1_9.configure(highlightbackground="#d9d9d9")
-        self.Message1_9.configure(highlightcolor="black")
-        self.Message1_9.configure(text='''X''')
-        self.Message1_9.configure(width=22)
+        self.Message1_11.configure(background="#565656")
+        self.Message1_11.configure(font=font11)
+        self.Message1_11.configure(foreground="#ffffff")
+        self.Message1_11.configure(highlightbackground="#d9d9d9")
+        self.Message1_11.configure(highlightcolor="black")
+        self.Message1_11.configure(text='''X''')
+        self.Message1_11.configure(width=22)
 
         self.Entry13 = tk.Entry(top)
         self.Entry13.place(relx=0.15, rely=0.889,height=20, relwidth=0.15)
@@ -532,35 +553,38 @@ class Toplevel1:
         self.Entry13.configure(selectbackground="#c4c4c4")
         self.Entry13.configure(selectforeground="black")
 
-        self.Message1_9 = tk.Message(top)
-        self.Message1_9.place(relx=0.1, rely=0.889, relheight=0.051
+        self.Message1_10 = tk.Message(top)
+        self.Message1_10.place(relx=0.1, rely=0.889, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_9.configure(background="#d9d9d9")
-        self.Message1_9.configure(foreground="#000000")
-        self.Message1_9.configure(highlightbackground="#d9d9d9")
-        self.Message1_9.configure(highlightcolor="black")
-        self.Message1_9.configure(text='''=''')
-        self.Message1_9.configure(width=60)
-
-        self.Message1_9 = tk.Message(top)
-        self.Message1_9.place(relx=0.333, rely=0.889, relheight=0.051
-                , relwidth=0.037)
-        self.Message1_9.configure(background="#d9d9d9")
-        self.Message1_9.configure(foreground="#000000")
-        self.Message1_9.configure(highlightbackground="#d9d9d9")
-        self.Message1_9.configure(highlightcolor="black")
-        self.Message1_9.configure(text='''Y''')
-        self.Message1_9.configure(width=60)
+        self.Message1_10.configure(background="#565656")
+        self.Message1_10.configure(font=font11)
+        self.Message1_10.configure(foreground="#ffffff")
+        self.Message1_10.configure(highlightbackground="#d9d9d9")
+        self.Message1_10.configure(highlightcolor="black")
+        self.Message1_10.configure(text='''=''')
+        self.Message1_10.configure(width=60)
 
         self.Message1_11 = tk.Message(top)
-        self.Message1_11.place(relx=0.383, rely=0.889, relheight=0.051
+        self.Message1_11.place(relx=0.333, rely=0.889, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_11.configure(background="#d9d9d9")
-        self.Message1_11.configure(foreground="#000000")
+        self.Message1_11.configure(background="#565656")
+        self.Message1_11.configure(font=font11)
+        self.Message1_11.configure(foreground="#ffffff")
         self.Message1_11.configure(highlightbackground="#d9d9d9")
         self.Message1_11.configure(highlightcolor="black")
-        self.Message1_11.configure(text='''=''')
+        self.Message1_11.configure(text='''Y''')
         self.Message1_11.configure(width=60)
+
+        self.Message1_12 = tk.Message(top)
+        self.Message1_12.place(relx=0.383, rely=0.889, relheight=0.051
+                , relwidth=0.037)
+        self.Message1_12.configure(background="#565656")
+        self.Message1_12.configure(font=font11)
+        self.Message1_12.configure(foreground="#ffffff")
+        self.Message1_12.configure(highlightbackground="#d9d9d9")
+        self.Message1_12.configure(highlightcolor="black")
+        self.Message1_12.configure(text='''=''')
+        self.Message1_12.configure(width=60)
 
         self.Entry14 = tk.Entry(top)
         self.Entry14.place(relx=0.433, rely=0.889,height=20, relwidth=0.15)
@@ -574,25 +598,27 @@ class Toplevel1:
         self.Entry14.configure(selectbackground="#c4c4c4")
         self.Entry14.configure(selectforeground="black")
 
-        self.Message1_10 = tk.Message(top)
-        self.Message1_10.place(relx=0.633, rely=0.889, relheight=0.051
+        self.Message1_12 = tk.Message(top)
+        self.Message1_12.place(relx=0.633, rely=0.889, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_10.configure(background="#d9d9d9")
-        self.Message1_10.configure(foreground="#000000")
-        self.Message1_10.configure(highlightbackground="#d9d9d9")
-        self.Message1_10.configure(highlightcolor="black")
-        self.Message1_10.configure(text='''Z''')
-        self.Message1_10.configure(width=60)
+        self.Message1_12.configure(background="#565656")
+        self.Message1_12.configure(font=font11)
+        self.Message1_12.configure(foreground="#ffffff")
+        self.Message1_12.configure(highlightbackground="#d9d9d9")
+        self.Message1_12.configure(highlightcolor="black")
+        self.Message1_12.configure(text='''Z''')
+        self.Message1_12.configure(width=60)
 
-        self.Message1_11 = tk.Message(top)
-        self.Message1_11.place(relx=0.683, rely=0.889, relheight=0.051
+        self.Message1_13 = tk.Message(top)
+        self.Message1_13.place(relx=0.683, rely=0.889, relheight=0.051
                 , relwidth=0.037)
-        self.Message1_11.configure(background="#d9d9d9")
-        self.Message1_11.configure(foreground="#000000")
-        self.Message1_11.configure(highlightbackground="#d9d9d9")
-        self.Message1_11.configure(highlightcolor="black")
-        self.Message1_11.configure(text='''=''')
-        self.Message1_11.configure(width=60)
+        self.Message1_13.configure(background="#565656")
+        self.Message1_13.configure(font=font11)
+        self.Message1_13.configure(foreground="#ffffff")
+        self.Message1_13.configure(highlightbackground="#d9d9d9")
+        self.Message1_13.configure(highlightcolor="black")
+        self.Message1_13.configure(text='''=''')
+        self.Message1_13.configure(width=60)
 
         self.Entry15 = tk.Entry(top)
         self.Entry15.place(relx=0.733, rely=0.889,height=20, relwidth=0.15)
@@ -610,15 +636,15 @@ class Toplevel1:
         top.configure(menu = self.menubar)
 
         self.Label3 = tk.Label(top)
-        self.Label3.place(relx=0.217, rely=0.022, height=40, width=205)
+        self.Label3.place(relx=0.25, rely=0.022, height=40, width=205)
         self.Label3.configure(activebackground="#f9f9f9")
-        self.Label3.configure(activeforeground="black")
-        self.Label3.configure(background="#d9d9d9")
+        self.Label3.configure(activeforeground="#7c7c7c")
+        self.Label3.configure(background="#565656")
         self.Label3.configure(disabledforeground="#a3a3a3")
-        self.Label3.configure(font=font9)
-        self.Label3.configure(foreground="#000000")
+        self.Label3.configure(font=font10)
+        self.Label3.configure(foreground="#ffffff")
         self.Label3.configure(highlightbackground="#d9d9d9")
-        self.Label3.configure(highlightcolor="black")
+        self.Label3.configure(highlightcolor="#f9f9f9")
         self.Label3.configure(text='''EQUATION SOLVER''')
 
 if __name__ == '__main__':
