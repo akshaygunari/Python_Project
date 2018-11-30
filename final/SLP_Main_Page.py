@@ -738,7 +738,7 @@ class Toplevel2:
         self.Button2.configure(text='''Refresh''', command=self.doRefresh)
 
         self.Button3 = tk.Button(top)
-        self.Button3.place(relx=0.01, rely=0.04, height=25, width=35)
+        self.Button3.place(relx=0.04, rely=0.04, height=35, width=50)
         self.Button3.configure(activebackground="#98DC9A")
         self.Button3.configure(activeforeground="#ffffff")
         self.Button3.configure(background="#98DC9A")
@@ -862,7 +862,7 @@ class Toplevel2:
         top.configure(menu=self.menubar)
 
         self.Label3 = tk.Label(top)
-        self.Label3.place(relx=0.35, rely=0.022, height=40, width=215)
+        self.Label3.place(relx=0.35, rely=0.04, height=40, width=215)
         self.Label3.configure(activebackground="#f9f9f9")
         self.Label3.configure(activeforeground="#7c7c7c")
         self.Label3.configure(background="#565656")
