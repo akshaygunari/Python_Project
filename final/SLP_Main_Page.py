@@ -6,7 +6,6 @@
 #    Nov 28, 2018 05:53:37 PM IST  platform: Windows NT
 
 import sys
-import time
 import numpy as np
 import tkinter.messagebox as fmsgbox
 
@@ -35,14 +34,16 @@ def start_gui():
     SLP_Main_Page_support.init(root, top)
     root.mainloop()
 
+
 def about():
     '''Starting point when module is the main routine.'''
     global val, w, root
     root.destroy()
     root = tk.Tk()
-    top = Toplevel3 (root)
+    top = Toplevel3(root)
     about_support.init(root, top)
     root.mainloop()
+
 
 def start_eqn():
     '''Starting point when module is the main routine.'''
@@ -53,6 +54,7 @@ def start_eqn():
     SLP_support.init(root, top)
     root.mainloop()
 
+
 def go_back():
     '''Starting point when module is the main routine.'''
     global val, w, root
@@ -61,6 +63,7 @@ def go_back():
     top = Toplevel1(root)
     about_support.init(root, top)
     root.mainloop()
+
 
 w = None
 
@@ -85,11 +88,7 @@ class Toplevel1:
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
            top is the toplevel containing window.'''
-        _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
-        _fgcolor = '#000000'  # X11 color: 'black'
-        _compcolor = '#d9d9d9'  # X11 color: 'gray85'
-        _ana1color = '#d9d9d9'  # X11 color: 'gray85'
-        _ana2color = '#ececec'  # Closest X11 color: 'gray92'
+
         font12 = "-family {Lucida Calligraphy} -size 30 -weight bold "  \
             "-slant roman -underline 1 -overstrike 0"
         font15 = "-family {Segoe UI Symbol} -size 16 -weight bold "  \
@@ -154,7 +153,7 @@ class Toplevel1:
         self.Button1.configure(highlightbackground="#d9d9d9")
         self.Button1.configure(highlightcolor="black")
         self.Button1.configure(pady="0")
-        self.Button1.configure(text='''Start''', command = start_eqn)
+        self.Button1.configure(text='''Start''', command=start_eqn)
         self.Button1.configure(width=101)
 
         self.Button2 = tk.Button(self.Frame1)
@@ -276,22 +275,23 @@ class Toplevel2:
         self.Label4.configure(text='''Rank is : ''')
         self.Label5.configure(text='''''')
         return
+
     def solveMatrix(self):
         condition1 = ((self.Entry1.get() is "") or (self.Entry2.get() is "") or (self.Entry3.get() is "") or (self.Entry4.get() is "") or
                       (self.Entry5.get() is "") or (self.Entry6.get() is "") or (self.Entry7.get() is "") or (self.Entry8.get() is "") or
                       (self.Entry9.get() is "") or (self.Entry10.get() is "") or (self.Entry11.get() is "") or (self.Entry12.get() is ""))
 
         if(condition1 is True):
-            fmsgbox.showinfo("Solver","Invalid user input. Please Check.")
+            fmsgbox.showinfo("Solver", "Invalid user input. Please Check.")
             return
 
         try:
             matrix_a = np.array([[float(self.Entry1.get()), float(self.Entry2.get()), float(self.Entry3.get())],
-                              [float(self.Entry5.get()), float(self.Entry6.get()), float(self.Entry7.get())],
-                              [float(self.Entry9.get()), float(self.Entry10.get()), float(self.Entry11.get())]])
+                                 [float(self.Entry5.get()), float(self.Entry6.get()), float(self.Entry7.get())],
+                                 [float(self.Entry9.get()), float(self.Entry10.get()), float(self.Entry11.get())]])
             matrix_ab = np.array([[float(self.Entry1.get()), float(self.Entry2.get()), float(self.Entry3.get()), float(self.Entry4.get())],
-                              [float(self.Entry5.get()), float(self.Entry6.get()), float(self.Entry7.get()), float(self.Entry8.get())],
-                              [float(self.Entry9.get()), float(self.Entry10.get()), float(self.Entry11.get()), float(self.Entry12.get())]])
+                                  [float(self.Entry5.get()), float(self.Entry6.get()), float(self.Entry7.get()), float(self.Entry8.get())],
+                                  [float(self.Entry9.get()), float(self.Entry10.get()), float(self.Entry11.get()), float(self.Entry12.get())]])
             rank_a = np.linalg.matrix_rank(matrix_a)
             rank_ab = np.linalg.matrix_rank(matrix_ab)
             self.Label4.configure(text=f'''Rank is : {rank_ab}''')
@@ -302,14 +302,14 @@ class Toplevel2:
                 if(rank_a == 3):
                     # consistent system. Unique Solution exist.
                     matrix2 = np.linalg.inv(matrix_a)
-                    matrix3 = np.array([float(self.Entry4.get()),float(self.Entry8.get()),float(self.Entry12.get())])
-                    results = np.round(matrix2.dot(matrix3),decimals=10)
-                    self.Entry13.delete(0,'end')
-                    self.Entry14.delete(0,'end')
-                    self.Entry15.delete(0,'end')
-                    self.Entry13.insert(0,results[0])
-                    self.Entry14.insert(0,results[1])
-                    self.Entry15.insert(0,results[2])
+                    matrix3 = np.array([float(self.Entry4.get()), float(self.Entry8.get()), float(self.Entry12.get())])
+                    results = np.round(matrix2.dot(matrix3), decimals=10)
+                    self.Entry13.delete(0, 'end')
+                    self.Entry14.delete(0, 'end')
+                    self.Entry15.delete(0, 'end')
+                    self.Entry13.insert(0, results[0])
+                    self.Entry14.insert(0, results[1])
+                    self.Entry15.insert(0, results[2])
                     self.Label5.configure(text='''System is consistent''')
                     return
                 else:
@@ -331,9 +331,6 @@ class Toplevel2:
            top is the toplevel containing window.'''
         _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
         _fgcolor = '#000000'  # X11 color: 'black'
-        _compcolor = '#d9d9d9' # X11 color: 'gray85'
-        _ana1color = '#d9d9d9' # X11 color: 'gray85'
-        _ana2color = '#d9d9d9' # X11 color: 'gray85'
         font10 = "-family {Franklin Gothic Medium Cond} -size 20 "  \
             "-weight bold -slant italic -underline 1 -overstrike 0"
         font11 = "-family {Segoe UI} -size 11 -weight bold -slant "  \
@@ -345,7 +342,7 @@ class Toplevel2:
         font9 = "-family {Footlight MT Light} -size 20 -weight bold "  \
             "-slant roman -underline 0 -overstrike 0"
 
-        top.geometry("600x480+557+153")
+        top.geometry("982x743+445+10")
         top.title("Matrix Mania")
         top.configure(background="#565656")
         top.configure(highlightbackground="#d9d9d9")
@@ -738,6 +735,19 @@ class Toplevel2:
         self.Button2.configure(pady="0")
         self.Button2.configure(text='''Refresh''', command=self.doRefresh)
 
+        self.Button3 = tk.Button(top)
+        self.Button3.place(relx=0.01, rely=0.04, height=25, width=35)
+        self.Button3.configure(activebackground="#98DC9A")
+        self.Button3.configure(activeforeground="#ffffff")
+        self.Button3.configure(background="#98DC9A")
+        self.Button3.configure(disabledforeground="#a3a3a3")
+        self.Button3.configure(font=font12)
+        self.Button3.configure(foreground="#000000")
+        self.Button3.configure(highlightbackground="#d9d9d9")
+        self.Button3.configure(highlightcolor="#000000")
+        self.Button3.configure(pady="0")
+        self.Button3.configure(text='''←''', command=go_back)
+
         self.Label2 = tk.Label(top)
         self.Label2.place(relx=0.05, rely=0.778, height=29, width=64)
         self.Label2.configure(activebackground="#f9f9f9")
@@ -850,7 +860,7 @@ class Toplevel2:
         top.configure(menu=self.menubar)
 
         self.Label3 = tk.Label(top)
-        self.Label3.place(relx=0.25, rely=0.022, height=40, width=205)
+        self.Label3.place(relx=0.35, rely=0.022, height=40, width=215)
         self.Label3.configure(activebackground="#f9f9f9")
         self.Label3.configure(activeforeground="#7c7c7c")
         self.Label3.configure(background="#565656")
@@ -890,11 +900,6 @@ class Toplevel3:
     def __init__(self, top=None):
         '''This class configures and populates the toplevel window.
            top is the toplevel containing window.'''
-        _bgcolor = '#d9d9d9'  # X11 color: 'gray85'
-        _fgcolor = '#000000'  # X11 color: 'black'
-        _compcolor = '#d9d9d9' # X11 color: 'gray85'
-        _ana1color = '#d9d9d9' # X11 color: 'gray85'
-        _ana2color = '#ececec' # Closest X11 color: 'gray92'
         font12 = "-family Meiryo -size 14 -weight normal -slant roman "  \
             "-underline 0 -overstrike 0"
         font13 = "-family {Meiryo UI} -size 14 -weight normal -slant "  \
@@ -906,8 +911,8 @@ class Toplevel3:
         font9 = "-family Fixedsys -size 22 -weight bold -slant roman "  \
             "-underline 0 -overstrike 0"
 
-        top.geometry("795x606+538+100")
-        top.title("New Toplevel")
+        top.geometry("982x743+445+10")
+        top.title("Matrix Mania")
         top.configure(background="#3f7cd8")
         top.configure(highlightbackground="#d9d9d9")
         top.configure(highlightcolor="black")
